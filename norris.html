@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chuck Norris Jokes! 🤣</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: red;
+            font-size: 3em;
+            text-shadow: 2px 2px #000;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #jokeContainer {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        pre {
+            font-size: 18px;
+            color: brown;
+            animation: wobble 0.5s ease infinite;
+        }
+        .speech-bubble {
+            position: relative;
+            background: #fff;
+            border-radius: 0.4em;
+            margin-top: 1em;
+            padding: 1em;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 25px solid transparent;
+            border-top-color: #fff;
+            border-bottom: 0;
+            border-right: 0;
+            margin-left: -12.5px;
+            margin-bottom: -25px;
+        }
+
+        @keyframes wobble {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+    </style>
+     <script>
+        async function fetchChuckNorrisJoke() {
+            const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+            document.getElementById("jokeContainer").innerText = "Chuck Norris is thinking...";
+            await sleep(5);            
+            let joke = "";
+            do {
+                const response = await fetch("https://api.chucknorris.io/jokes/random");
+                if (response.status === 200) {
+                    const data = await response.json();
+                    joke = data.value;
+                } else {
+                    document.getElementById("jokeContainer").innerText = "Even Chuck Norris can't fix this...";
+                    return;
+                }
+            } while (joke.length > 65);  // Change 80 to your preferred maximum length
+            document.getElementById("jokeContainer").innerText = joke;
+        }
+    </script>
+</head>
+<body>
+    <h1>Chuck Norris Jokes!</h1>
+    <button onclick="fetchChuckNorrisJoke()">Unleash The Chuck!</button>
+    <div class="speech-bubble" id="jokeContainer">Press the button, if you dare!</div>
+</br></br>
+</br>
+
+    <pre>
+        <img src="C:\Users\EyalRonen\Downloads\pngegg.png" alt="Alternative Text" style="width:220px;">
+    </pre>
+</body>
+</html>
